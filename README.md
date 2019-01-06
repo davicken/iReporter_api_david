@@ -37,15 +37,39 @@ Technology Used
     * Flask micro-framework
     
 
-Available API Endpoints
-| EndPoint                              | Functionality      |
-| -------------                         |:------------------:|
-| POST /red-flags                       | Create a red flag record |
-| GET /red-flags                        | Get all red flag records |
-| GET /red-flags/<red-flag-id>          | Fetch a single red flag record given its id |
-| PATCH /red-flags/<red-flag-id>/comment| Edit the comment of a redflag record|
-| DELETE /red-flags/<red-flag-id>       | Delete a red fag record given an id|
-| PATCH /red-flags/<red-flag-id>/status |Change the status of a record given an id| 
+## Available API Endpoints
+
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l"><b>EndPoint  </b></th>
+    <th class="tg-yw4l"><b>Functionality</b></th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">POST /red-flags</td>
+    <td class="tg-yw4l">Create a red flag record</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">GET /red-flags </td>
+    <td class="tg-yw4l">Get all red flag records</td>
+  </tr>
+ <tr>
+    <td class="tg-yw4l">GET /red-flags/red-flag-id</td>
+    <td class="tg-yw4l">Fetch a single red flag record given its id</td>
+  </tr>
+ <tr>
+    <td class="tg-yw4l">PATCH /red-flags/red-flag-id/comment </td>
+    <td class="tg-yw4l">Edit the comment of a redflag record</td>
+  </tr>
+ <tr>
+    <td class="tg-yw4l">DELETE /red-flags/red-flag-id</td>
+    <td class="tg-yw4l">Delete a red fag record given an id</td>
+  </tr>
+ <tr>
+    <td class="tg-yw4l">PATCH /red-flags/red-flag-id/status</td>
+    <td class="tg-yw4l">Change the status of a record given an id</td>
+  </tr>
+
+</table>
   
 ## Installing
 
@@ -75,7 +99,7 @@ pip install -r requirements.txt
 At the terminal type in
 
 ```python run.py```
-To run tests run this command at the console/terminal
+To run tests type this command at the console/terminal
 ```pytest```
 
 
