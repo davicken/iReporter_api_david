@@ -76,7 +76,8 @@ Technology Used
 First clone this repository
 ```
 git clone -b develop https://github.com/davicken/iReporter-api.git 
-cd iReporter_api
+cd iReporter_api_david
+
 ```
 
 Then create a virtual environment
