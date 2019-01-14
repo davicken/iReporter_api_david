@@ -1,9 +1,7 @@
 # iReporter API by Mwesigwa David Keneth 
 
   [![Build Status](https://travis-ci.com/davicken/iReporter_api_david.svg?branch=master)](https://travis-ci.com/davicken/iReporter_api_david)
-
   [![Maintainability](https://api.codeclimate.com/v1/badges/b3bc5f0c0837e4abf855/maintainability)](https://codeclimate.com/github/davicken/iReporter_api_david/maintainability)
-
   [![Test Coverage](https://api.codeclimate.com/v1/badges/b3bc5f0c0837e4abf855/test_coverage)](https://codeclimate.com/github/davicken/iReporter_api_david/test_coverage)
   
   * iReporter is a corruption reporting and awareness platform that seeks for a reduced corruption level and government intervention.
