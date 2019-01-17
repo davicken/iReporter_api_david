@@ -4,8 +4,8 @@ from api.v1.models.redflags import RedFlag
 
 # validations
 from api.v1.controllers.controller import validate_string
-from api.v1.controllers.controller import required_image_field 
-from api.v1.controllers.controller import comment_length
+# from api.v1.controllers.controller import required_image_field 
+# from api.v1.controllers.controller import comment_length
 
 from datetime import datetime
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -35,7 +35,6 @@ def create_redflag():
 
 
     try:
-        # print(data)
         # validate_string(data['inc_type'])
         # required_image_field (data['images'])
         # comment_length (data['comment']) 
