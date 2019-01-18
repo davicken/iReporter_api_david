@@ -36,14 +36,14 @@ def create_redflag():
 
 
     try:
-        # validate_string(data['inc_type'])
+        validate_string(data['comment'])
         # required_image_field (data['images'])
         # comment_length (data['comment']) 
         flag_record = RedFlag(inc_type, inc_id,location, createdOn, createdBy, status, comment, images, videos)
         redflags.append(flag_record)
     except ValueError as e:
         print(e)
-        return jsonify({'status': 400, 'message': 'location should be a string'})
+        return jsonify({'status': 400, 'message': 'comment should be a string'})
     return jsonify({'status': 201, 'redflags': [flag_record.to_json()]})
 
 # get all red-flags end-point

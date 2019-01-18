@@ -2,7 +2,7 @@
 def validate_string(r):
     if not isinstance(r,str):
         raise ValueError
-    return 'Location is not a string'
+    return 'comment is not a string'
 
 # def required_image_field(img):
 #     if len(img) == 0:
