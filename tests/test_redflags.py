@@ -2,7 +2,6 @@ import unittest
 import json
 from api.v1 import app
 
-
 class TestRedflags(unittest.TestCase):
 
     def setUp(self):
