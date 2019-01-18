@@ -1,6 +1,7 @@
-from flask import request, jsonify
+from flask import request, jsonify, request
 from api.v1 import app
 from api.v1.models.redflags import RedFlag
+
 
 # validations
 from api.v1.controllers.controller import validate_string
