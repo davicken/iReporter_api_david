@@ -1,6 +1,6 @@
 import unittest
 import json
-from api.v1 import app
+from api import app
 
 class TestRedflags(unittest.TestCase):
 
