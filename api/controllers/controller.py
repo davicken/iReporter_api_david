@@ -1,13 +1,5 @@
-# validate  location input (should be a string)
+# validate  
 def validate_string(r):
     if not isinstance(r, str):
         raise ValueError
-    return 'comment is not a string'
-
-# def required_image_field(img):
-#     if len(img) == 0:
-#         return 'You should attach an image evidance'
-
-# def comment_length(comm):
-#     if len(comm) > 4:
-#         return 'Please enter at most 4 characters'
+    return 'comment should be a string'
