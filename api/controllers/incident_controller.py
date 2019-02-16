@@ -40,6 +40,7 @@ class IncidentController:
                 'error': 'Request Cannot Be Empty',
                 'status': 400
             }), 400
+            
         #ensuring data format being posted is json
         if request.content_type != 'application/json':
             return jsonify({
@@ -62,9 +63,7 @@ class IncidentController:
             images = images,
             videos = videos
         )
-
-        my_redflags.create_redflag(flag_record)
-        
+        my_redflags.redflags.append(flag_record)
         return jsonify({'status': 201, 'data': [{
             "id": incidentId,
             "message": "created red-flag record successfully" 
@@ -76,7 +75,18 @@ class IncidentController:
         json_redflags = []
         for redflag in my_redflags.redflags:
             json_redflags.append(redflag.to_json())
-        return jsonify({'status': 200, 'data': json_redflags})
+
+        if len(json_redflags) < 1:
+            return jsonify({
+                'error': 'There are no red-flag records currently',
+                'status': 404
+                }), 404
+
+        return jsonify({
+            'status': 200, 
+            'data': json_redflags
+            })
+
 
     def get_redflag(self, red_flag_id):
         # get a specific red-flag based on its id

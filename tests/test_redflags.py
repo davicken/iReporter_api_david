@@ -15,8 +15,10 @@ class TestRedflagEndPoints(unittest.TestCase):
  
     def tear_down(self):
         my_redflags.redflags.clear()
+
        
     def test_index(self):
+        # test for whether the default root url returns the correct message
         response = self.test_app.get('/api/v1/')
         self.assertEqual(response.status_code, 200)
         my_data = response.data.decode()
@@ -35,7 +37,7 @@ class TestRedflagEndPoints(unittest.TestCase):
         self.assertEqual(json.loads(my_data), message)
 
     def test_all_redflags_when_not_empty(self): 
-        # test that the red-flag data posted can all be retrieved & not empty
+        # tests for getting all red-flags  when the red-flag list has 1 or more red-flag records
         input_data1 = {
             "title": "corruption at the office",
             "images": ["image1", "image2"],
@@ -43,20 +45,24 @@ class TestRedflagEndPoints(unittest.TestCase):
             "comment": "corruption has become a menace",
             "location": {"lat": "0.3333", "long": "1.0444"}
         }
-        self.test_app.post('/api/v1/red-flags', content_type='application/json', data=json.dumps(input_data1), headers={'userId': 1})
+        post_resp1 = self.test_app.post('/api/v1/red-flags', content_type='application/json', data=json.dumps(input_data1), headers={'userId': 1})
+        self.assertEqual(post_resp1.status_code,201)
+
         input_data2 = {
             "title": "embezzlement of funds",
             "images": ["image3", "image4"],
             "videos": ["video7", "video8"],
             "comment": "embezzlement is real evil",
-            "location": {"lat": "0.3443", "long": "1.4334"}
+        
+               "location": {"lat": "0.3443", "long": "1.4334"}
         }
-        post_resp = self.test_app.post('/api/v1/red-flags', content_type='application/json', data=json.dumps(input_data2), headers={'userId': 1})
-        self.assertEqual(post_resp.status_code,201)
+        post_resp2 = self.test_app.post('/api/v1/red-flags', content_type='application/json', data=json.dumps(input_data2), headers={'userId': 1})
+        self.assertEqual(post_resp2.status_code,201)
         response = self.test_app.get('/api/v1/red-flags')
         self.assertEqual(response.status_code, 200)
 
         my_data = json.loads(response.data.decode())
+        print(my_data['data'])
         self.assertEqual(len(my_data['data']), 2)
         self.assertEqual(my_data['data'][1]['title'], "embezzlement of funds")
         self.assertEqual(my_data['data'][1]['comment'], "embezzlement is real evil")
@@ -64,16 +70,17 @@ class TestRedflagEndPoints(unittest.TestCase):
         self.assertEqual(my_data ['data'][0]['location'], {"lat": "0.3333", "long": "1.0444"})
         self.assertEqual(my_data ['data'][0]['id'], 1)
 
+
     def test_all_redflags_when_empty(self):
+        # test the get all red-flag endpoint when the red-flag list has no red-flag records or empty
         response = self.test_app.get('/api/v1/red-flags')
         my_data = json.loads(response.data.decode())
-        self.assertEqual(response.status_code, 200)
-        # *****************************************
-        # response status_code susposed to be 400
+        self.assertEqual(response.status_code, 404)
         self.assertIn('no red-flag records', my_data['error'])
 
-    def test_create_redflag(self):
-        # test whether the status code and data after creating a redflag can be retieved correctly
+
+    def test_create_redflag_with_correct_data(self):
+        # test whether the status code and message after creating a redflag record are correct
         input_data = {
             "title": "corruption at the office",
             "images": ["image1", "image2"],
@@ -89,7 +96,9 @@ class TestRedflagEndPoints(unittest.TestCase):
         self.assertEqual(response['status'], 201)
         self.assertEqual(my_data[0]['message'], "created red-flag record successfully")
 
-    def test_create_redflag_with_wrong_comment(self):
+
+    def test_create_redflag_with_wrong_data(self):
+        # tests a red-flag created with a comment with wrong datatype
         input_data = {
             "title": "corruption at the office",
             "images": ["image1", "image2"],
@@ -98,8 +107,6 @@ class TestRedflagEndPoints(unittest.TestCase):
             "location": {"lat": "98854", "long": "888484"}
             }
         response = self.test_app.post('/api/v1/red-flags', content_type='application/json', data=json.dumps(input_data), headers={'userId': 1})
-        self.assertEqual(response.status_code, 200)
-        # *************************************
-        # status code susposed to be 400
+        self.assertEqual(response.status_code, 400)
     
    

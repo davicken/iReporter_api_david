@@ -60,8 +60,8 @@ class IncidentData:
         self.redflags = []
         self.interventions = []
 
-    # Deal with red-flags
-    def create_redflag(self, redflag):
-        self.redflags.append(redflag)
+    # # Deal with red-flags
+    # def create_redflag(self, redflag):
+    #     self.redflags.append(redflag)
 
    
