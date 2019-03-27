@@ -120,7 +120,7 @@ class IncidentController:
             'error': 'That red-flag record does not exist'
         }), 404
 
-    def edit_location(self, red_flag_id):
+    def edit_location_and_comment(self, red_flag_id):
         # edit specific red-flag record location
         if not request.json:
             return jsonify({
@@ -128,52 +128,45 @@ class IncidentController:
                 'error': 'There is no request data given, Provide new location'
             }), 400
         new_location = request.get_json()
+        new_comment = request.get_json()
+
         if 'location' not in new_location:
             return jsonify({
                 "status": 400,
                 "error": "wrong location format. follow this example ->> 'location':{'lat': '0.55767630', 'long': '0.355475685'}"
             }), 417
 
-        for redflag in my_redflags.redflags:
-            if redflag.__dict__["incidentId"] == red_flag_id:
-                redflag.__dict__["location"] = new_location["location"]
-                return jsonify({
-                    "status": 202,
-                    "data": [{
-                        "message": "Location of red-flag record id {} updated to {}".format(red_flag_id, new_location["location"])
-                    }]
-                }), 202
-
-        return jsonify({
-            "status": 404,
-            "error": "Sorry, that red-flag record does\'t exist"
-        }), 404
-
-    def edit_comment(self, red_flag_id):
-        # edit red-flag record  comment
-        if not request.json:
-            return jsonify({
-                'status': 400,
-                'error': 'There is no request data given, Provide new comment'
-            }), 400
-        new_comment = request.get_json()
         if 'comment' not in new_comment:
             return jsonify({
                 "status": 400,
                 "error": "wrong comment format. follow this example ->> 'comment':'My red-flag comment'"
             }), 417
 
+
         for redflag in my_redflags.redflags:
             if redflag.__dict__["incidentId"] == red_flag_id:
+                redflag.__dict__["location"] = new_location["location"]
                 redflag.__dict__["comment"] = new_comment["comment"]
-                return jsonify({
-                    "status": 202,
-                    "data": [{
-                        "message": "comment of red-flag record id {} updated to {}".format(red_flag_id, new_comment["comment"])
-                    }]
-                }), 202
+
+                if new_location["location"]:
+                    return jsonify({
+                        "status": 202,
+                        "data": [{
+                            "message": "Location of red-flag record id {} updated to {}".format(red_flag_id, new_location["location"])
+                        }]
+                    }), 202
+
+                if new_comment["comment"]:
+                    return jsonify({
+                        "status": 202,
+                        "data": [{
+                            "message": "comment of red-flag record id {} updated to {}".format(red_flag_id, new_comment["comment"])
+                        }]
+                    }), 202
 
         return jsonify({
             "status": 404,
             "error": "Sorry, that red-flag record does\'t exist"
         }), 404
+
+   
