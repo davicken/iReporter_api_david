@@ -33,9 +33,9 @@ def delete_specific_record(red_flag_id):
 # edit specific red-flag record location endpoint
 @b_print.route('/red-flags/<int:red_flag_id>/location', methods=['PATCH'])
 def edit_specific_location(red_flag_id):
-    return redflag_obj.edit_location(red_flag_id)
+    return redflag_obj.edit_location_and_comment(red_flag_id)
 
 # edit specific red-flag record  comment endpoint
 @b_print.route('/red-flags/<int:red_flag_id>/comment', methods=['PATCH'])
 def edit_specific_comment(red_flag_id):
-    return redflag_obj.edit_comment(red_flag_id)
+    return redflag_obj.edit_location_and_comment(red_flag_id)
