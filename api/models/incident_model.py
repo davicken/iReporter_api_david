@@ -33,26 +33,6 @@ class RedFlag(Incident):
             'videos': self.videos
         }
 
-class Intervention(Incident):
-    def __init__(self, **kwargs):
-        self.incType = "intervention"
-        super().__init__(**kwargs)
-
-    def to_json(self):
-        return {
-            'id': self.incidentId,
-            'title': self.title,
-            'type': self.incType,
-            'createdOn': self.createdOn,
-            'createdBy': self.createdBy,
-            'location': self.location,
-            'status': self.status,
-            'comment': self.comment,
-            'images': self.images,
-            'videos': self.videos
-        }
-
-
 class IncidentData: 
     # class for managing data of incidents
 
